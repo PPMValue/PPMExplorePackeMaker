@@ -4,6 +4,7 @@ const PackageContext = createContext()
 
 export const PackageProvider = ({ children }) => {
 	const [tourPackage, setTourPackage] = useState({
+		package_name: "",
 		pageOne: [
 			{
 				id: uuid(),
@@ -57,8 +58,6 @@ export const PackageProvider = ({ children }) => {
 			number: "",
 		},
 	})
-
-	// console.log("package", tourPackage)
 
 	return (
 		<PackageContext.Provider value={{ tourPackage, setTourPackage }}>

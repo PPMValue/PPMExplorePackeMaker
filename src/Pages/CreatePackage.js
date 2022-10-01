@@ -27,6 +27,14 @@ const CreatePackage = () => {
 	const { upload } = useUploadImage()
 	const { deleteImage } = useDeleteImage()
 	const { pageOne } = tourPackage
+
+	const onPackageNameHandler = (e) => {
+		const { name, value } = e.target
+		setTourPackage((prev) => {
+			return { ...prev, [name]: value }
+		})
+	}
+
 	const onChangeHandler = (e) => {
 		const { name, value } = e
 
@@ -64,6 +72,18 @@ const CreatePackage = () => {
 	return (
 		<div className="font-openSans bg-gray-100 min-h-screen py-10 w-full">
 			<form onSubmit={onSubmitHandler} className="max-w-4xl  m-auto">
+				{/* Package name */}
+				<Card heading="Package info">
+					<div>
+						<Forms.Input
+							value={tourPackage.package_name}
+							onChange={onPackageNameHandler}
+							label="Package name"
+							placeholder="Name..."
+							name="package_name"
+						/>
+					</div>
+				</Card>
 				{/*  Logo and slogan */}
 				<Card heading="First page">
 					<div className="flex items-start space-x-4">

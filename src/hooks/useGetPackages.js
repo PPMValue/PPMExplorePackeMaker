@@ -7,22 +7,23 @@ const useGetPackages = () => {
 	const [isLoading, setIsLoading] = useState(false)
 	const packagesCollectionRef = collection(db, "packages")
 
-	useEffect(() => {
-		const getPackages = async () => {
-			try {
-				setIsLoading(true)
-				const data = await getDocs(packagesCollectionRef)
-				setPackages(data?.docs?.map((doc) => ({ ...doc.data(), id: doc.id })))
-				setIsLoading(false)
-			} catch (e) {
-				setIsLoading(false)
-				setPackages(null)
-				console.log(e)
-			}
+	const getPackages = async () => {
+		try {
+			setIsLoading(true)
+			const data = await getDocs(packagesCollectionRef)
+			setPackages(data?.docs?.map((doc) => ({ ...doc.data(), id: doc.id })))
+			setIsLoading(false)
+		} catch (e) {
+			setIsLoading(false)
+			setPackages(null)
+			console.log(e)
 		}
+	}
+
+	useEffect(() => {
 		getPackages()
 	}, [])
-	return { packages, isLoading }
+	return { packages, isLoading, getPackages }
 }
 
 export default useGetPackages
