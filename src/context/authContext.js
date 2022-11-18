@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 			if (userData) {
 				setUserUID(userData.uid)
 				setIsAuth(true)
-				console.log("In OnAuthStateChanged")
+				// console.log("In OnAuthStateChanged")
 			}
 		})
 	}, [])

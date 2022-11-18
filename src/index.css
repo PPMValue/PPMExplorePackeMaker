@@ -56,3 +56,10 @@
 		z-index: 1000;
 	}
 }
+
+@layer components {
+	/* Table row with link style */
+	.link-style {
+		@apply font-semibold hover:text-blue-600 text-blue-400 duration-200  hover:underline cursor-pointer;
+	}
+}

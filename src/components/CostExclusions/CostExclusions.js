@@ -106,7 +106,7 @@ const CostExclusions = () => {
 				)}
 
 				{tourPackage?.exclusions?.items?.map((item) => (
-					<div id={item?.id} className="flex gap-6 max-w-md items-start">
+					<div key={item?.id} className="flex gap-6 max-w-md items-start">
 						<Buttons.DangerIcon
 							onClick={() => removeItemHandler(item?.id)}
 							icon={HiTrash}

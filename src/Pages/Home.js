@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router"
+import { useNavigate, Link } from "react-router-dom"
 // Firebase
-import { HiDownload, HiTrash } from "react-icons/hi"
+import { HiPencilAlt, HiTrash } from "react-icons/hi"
 import useGetPackages from "../hooks/useGetPackages"
 import useDeletePackage from "../hooks/useDeletePackage"
 
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner"
+import SliceTextIf from "../components/SliceTextIf/SliceTextIf"
 
 const Home = () => {
 	const navigate = useNavigate()
@@ -22,30 +23,32 @@ const Home = () => {
 	}
 
 	return (
-		<div className="font-openSans bg-gray-100 min-h-screen w-full">
+		<div className="px-3">
 			{deleteloading && <LoadingSpinner />}
-			<section className="max-w-4xl  m-auto pt-10">
-				<h2 className="text-slate-800  text-xl font-semibold underline">
+			<section className="max-w-4xl   m-auto pt-10">
+				<h2 className="text-slate-800  text-3xl font-light mb-6 border-l-4 border-l-red-500/80 pl-3">
 					Packages
 				</h2>
-				<div className="max-w-lg border rounded-md p-3 bg-white shadow mt-2">
+				<div className="max-w-xl border rounded-md p-3 bg-white shadow mt-2">
 					{packages?.map((item) => (
 						<div
 							key={item?.id}
 							className="w-full py-2 flex justify-between items-center"
 						>
-							<h3>{item?.package_name}</h3>
+							<Link to={`/pdf/${item?.id}`} className="link-style text-sm">
+								<SliceTextIf moreThan={30}>{item?.package_name}</SliceTextIf>
+							</Link>
 							<div className="flex items-center space-x-4">
-								<HiDownload
-									onClick={() => navigate(`/pdf/${item?.id}`)}
+								<HiPencilAlt
+									onClick={() => navigate(`/edit/${item?.id}`)}
+									// onClick={() => navigate(`/pdf/${item?.id}`)}
 									className="cursor-pointer h-5 w-5 text-gray-400 hover:text-gray-600 duration-200"
 								/>
 								<button
 									onClick={() => deletePackageHanlder(item?.id)}
-									className="px-3 py-1 border-2 text-xs text-red-600 font-semibold border-red-600 rounded-lg flex items-center hover:bg-red-600 hover:text-white duration-200 ease-in-out"
+									className="text-red-400 font-semibold hover:text-red-600 duration-200 ease-in-out"
 								>
-									Remove
-									<HiTrash className="w-4 h-4 ml-2  " />
+									<HiTrash className="w-5 h-5 ml-2  " />
 								</button>
 							</div>
 						</div>
